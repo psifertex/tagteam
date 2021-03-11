@@ -44,7 +44,8 @@ def cc(fn):
 def isswitchy(fn):
 	for h in fn.hlil.instructions:
 		if h.operation == HighLevelILOperation.HLIL_SWITCH:
-			return len(h.cases) > Settings().get_integer("tagteam.largeSwitch")
+			if len(h.cases) > Settings().get_integer("tagteam.largeSwitch"):
+				return True
 	return False
 
 def iscomplex(fn):

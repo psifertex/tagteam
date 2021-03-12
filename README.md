@@ -1,4 +1,4 @@
-# Tag Team (v1.1)
+# Tag Team (v1.1.3)
 Author: **psifertex**
 
 _Tags functions using emoji for a number of interesting characteristics_

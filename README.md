@@ -1,11 +1,18 @@
-# FUNctional Tags (v1.0)
+# Tag Team (v1.0)
 Author: **psifertex**
 
 _Tags functions using emoji for a number of interesting characteristics_
 
 ## Description:
 
-LONG DESCRIPTION HERE ONCE I GET AN IMAGE
+# Tag Team
+Sample function created on [stream](https://www.youtube.com/watch?v=BEB52ZYr2Gw).
+
+ [Tag List](https://raw.githubusercontent.com/psifertex/tagteam/master/images/taglist.png)
+
+ ![Tags At Location](https://raw.githubusercontent.com/psifertex/tagteam/master/images/tagsat.png)
+
+
 
 
 ## Installation Instructions

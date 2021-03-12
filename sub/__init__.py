@@ -3,32 +3,33 @@
 from binaryninja import PluginCommand, Settings, interaction, log_info, HighLevelILOperation
 
 Settings().register_group("tagteam", "Tag Team Plugin")
-Settings().register_setting("tagteam.largeFunc", """
-	{
-		"title" : "Number of basic blocks",
-		"type" : "number",
-		"default" : 40,
-		"description" : "Functions with more than this number of basic blocks will be considered large"
-	}
-	""")
+Settings().register_setting("tagteam.largeFunc", """{
+	"title" : "Number of basic blocks",
+	"type" : "number",
+	"default" : 40,
+	"description" : "Functions with more than this number of basic blocks will be considered large"
+}""")
 
-Settings().register_setting("tagteam.largeSwitch", """
-	{
-		"title" : "Large Switch Statement",
-		"type" : "number",
-		"default" : 10,
-		"description" : "Functions with switch statements with more than this many cases are considered switchy"
-	}
-	""")
+Settings().register_setting("tagteam.complexFunc", """{
+	"title" : "Complex Function",
+	"type" : "number",
+	"default" : 40,
+	"description" : "Measure of cyclomatic complexity over which a function is considered complex"
+}""")
 
-Settings().register_setting("tagteam.complexFunc", """
-	{
-		"title" : "Complex Function",
-		"type" : "number",
-		"default" : 40,
-		"description" : "Functions with cyclomatic complexity scores above this will be considered complex"
-	}
-	""")
+Settings().register_setting("tagteam.largeSwitch", """{
+	"title" : "Large Switch Statement",
+	"type" : "number",
+	"default" : 10,
+	"description" : "Functions with switch statements with more than this many cases are considered switchy"
+}""")
+
+Settings().register_setting("tagteam.noisy", """{
+	"title" : "Noisy Mode",
+	"type" : "boolean",
+	"default" : false,
+	"description" : "When enabled, will rename functions in addition to tagging"
+}""")
 
 def init_tags(bv):
 	for tagType in tags:
@@ -86,6 +87,7 @@ def start(bv):
 		for tagType in tags:
 			if tagType['fn'](fn):
 				fn.create_user_function_tag(bv.tag_types[tagType['name']], '', unique=True)
-				#fn.name = fn.name + tagType['emoji']
+				if Settings().get_bool("tagteam.noisy"):
+					fn.name = fn.name + tagType['emoji']
 
 PluginCommand.register("TagTeam", "Tag Functions with Emoji for Various Properties", start)
